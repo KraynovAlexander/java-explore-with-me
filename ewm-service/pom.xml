@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>main-service</name>
+    <name>ewm-service</name>
 
-    <artifactId>main-service</artifactId>
+    <artifactId>ewm-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
