@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.main.categories.dto.CategoryDto;
+import ru.practicum.main.comment.dto.CommentToGetEventDto;
 import ru.practicum.main.events.model.Location;
 import ru.practicum.main.users.dto.UserInitiatorDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -45,5 +47,7 @@ public class EventToGetDto {
     private String title;
 
     private Long views;
+
+    private List<CommentToGetEventDto> comments;
 
 }

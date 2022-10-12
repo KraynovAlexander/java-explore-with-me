@@ -76,7 +76,7 @@ public class EventServiceImpl implements EventService {
         Pageable pageable = PageRequest.of(from / size, size, Sort.by(fieldToSort).descending());
 
         return eventRepository.searchEventsByTextAndParams(text, categoriesId, paid,
-                start, end, pageable)
+                        start, end, pageable)
                 .getContent();
     }
 
@@ -104,5 +104,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public Optional<Event> getEventByCategoryId(Long categoryId) {
         return eventRepository.getFirstByCategory(categoryId);
+    }
+
+    @Override
+    public String getEventTitleById(Long eventId) {
+        return eventRepository.getEventTitleById(eventId);
     }
 }

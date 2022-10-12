@@ -1,10 +1,12 @@
 package ru.practicum.main.events.model;
 
 import lombok.Data;
+import ru.practicum.main.comment.model.Comment;
 import ru.practicum.main.compilations.model.Compilation;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -60,5 +62,10 @@ public class Event {
 
     @ManyToMany(mappedBy = "events")
     private List<Compilation> compilations;
+
+    @OneToMany
+    @JoinColumn(name = "event_id")
+    private List<Comment> comments = new ArrayList<>();
+
 
 }

@@ -3,6 +3,7 @@ package ru.practicum.main.events.mapper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import ru.practicum.main.categories.dto.CategoryDto;
+import ru.practicum.main.comment.mapper.CommentMapper;
 import ru.practicum.main.events.dto.EventToCompilationDto;
 import ru.practicum.main.events.dto.EventToCreateDto;
 import ru.practicum.main.events.dto.EventToGetDto;
@@ -13,6 +14,7 @@ import ru.practicum.main.users.dto.UserInitiatorDto;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class EventMapper {
@@ -76,6 +78,11 @@ public class EventMapper {
         eventToGetDto.setRequestModeration(event.isRequestModeration());
         eventToGetDto.setTitle(event.getTitle());
         eventToGetDto.setState(event.getState().toString());
+
+        eventToGetDto.setComments(event.getComments()
+                .stream()
+                .map(CommentMapper::toGetEventDto)
+                .collect(Collectors.toList()));
 
         return eventToGetDto;
 
