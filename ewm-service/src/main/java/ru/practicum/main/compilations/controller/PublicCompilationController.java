@@ -27,7 +27,7 @@ public class PublicCompilationController {
             @Positive @RequestParam(required = false, defaultValue = "10") Integer size) {
 
         log.info("(Public)CompilationsController.getCompilationsByPages: получен запрос на получение сборников по" +
-                "pages, pinned={}", pinned);
+                "страницы, прикрепленные={}", pinned);
 
         return publicCompilationService.getCompilationsByPages(pinned, from, size);
 

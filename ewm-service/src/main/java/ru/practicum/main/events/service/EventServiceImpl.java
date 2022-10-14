@@ -26,7 +26,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event addNewEvent(Event event) {
 
-        log.info("EventService.addNewEvent: send a request to DB to create New event with title={}", event.getTitle());
+        log.info("EventService.addNewEvent: отправьте запрос в базу данных на создание нового события с заголовком={}", event.getTitle());
 
         event.setState(EventState.PENDING);
 
@@ -36,7 +36,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event updateEvent(Event event) {
 
-        log.info("EventService.updateEvent: send a request to DB to create New event with title={}", event.getTitle());
+        log.info("EventService.updateEvent: отправьте запрос в базу данных на создание нового события с заголовком={}", event.getTitle());
 
         return eventRepository.save(event);
 
@@ -46,15 +46,15 @@ public class EventServiceImpl implements EventService {
     public Event getEventById(Long id) {
 
         return eventRepository.findById(id)
-                .orElseThrow(() -> new EventNotFoundException("event not found"));
+                .orElseThrow(() -> new EventNotFoundException("событие не найдено"));
     }
 
     @Override
     public void deleteEventById(Long id) {
 
         if (!existById(id)) {
-            log.error("EventService.deleteEventById: event with id={} do not exists", id);
-            throw new EventNotFoundException("event not found");
+            log.error("EventService.deleteEventById: событие с id={} не существует", id);
+            throw new EventNotFoundException("событие не найдено");
         }
 
         eventRepository.deleteById(id);

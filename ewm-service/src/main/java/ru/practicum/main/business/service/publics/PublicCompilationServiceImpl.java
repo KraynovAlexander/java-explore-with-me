@@ -57,8 +57,8 @@ public class PublicCompilationServiceImpl implements PublicCompilationService {
     public CompilationDto getCompilationById(Long compilationId) {
 
         if (!compilationService.existCompilationById(compilationId)) {
-            log.error("PublicApiService.getCompilationById: compilation with id={} not exist", compilationId);
-            throw new CompilationNotFoundException("compilation not found");
+            log.error("PublicApiService.getCompilationById: компиляция с id={} не существует", compilationId);
+            throw new CompilationNotFoundException("компиляция не найдена");
         }
 
         Compilation compilation = compilationService.getCompilationById(compilationId);

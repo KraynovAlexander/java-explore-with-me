@@ -13,7 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Page<Category> getCategoriesBy(Pageable pageable);
 
 
-    @Query("select c.name from Category c where c.id = ?1")
+    @Query("SELECT c.name FROM Category c WHERE c.id = ?1")
     Optional<String> getCategoryNameById(Long categoryId);
 
 }

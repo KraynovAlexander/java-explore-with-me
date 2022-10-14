@@ -40,7 +40,7 @@ public class PrivateEventController {
                                            @RequestBody EventToUpdateByAdminDto eventToUpdateByAdminDto) {
 
         log.info("(Private)EventController.updateEventsByUser: получен запрос на обновление события с id={}" +
-                "by user with id={}", eventToUpdateByAdminDto.getEventId(), userId);
+                "пользователем с id={}", eventToUpdateByAdminDto.getEventId(), userId);
 
         return privateEventService.updateEventByUser(userId, eventToUpdateByAdminDto);
 
@@ -61,7 +61,7 @@ public class PrivateEventController {
     public EventToGetDto getEventByIdByOwner(@PathVariable Long userId, @PathVariable Long eventId) {
 
         log.info("(Private)EventController.getEventByIdByOwner: получен запрос на получение события с id={}" +
-                " by owner with id={}", eventId, userId);
+                " владельцем с id={}", eventId, userId);
 
         return privateEventService.getEventByIdByOwner(userId, eventId);
 
@@ -71,7 +71,7 @@ public class PrivateEventController {
     public EventToGetDto cancelEventByOwner(@PathVariable Long userId, @PathVariable Long eventId) {
 
         log.info("(Private)EventController.cancelEventByOwner: получен запрос на отмену мероприятия с " +
-                "id={} by owner with id ={}", eventId, userId);
+                "id={} владельцем с id ={}", eventId, userId);
 
         return privateEventService.cancelEventByOwner(userId, eventId);
 

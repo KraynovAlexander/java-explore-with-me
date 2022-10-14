@@ -34,15 +34,15 @@ public class CompilationServiceImpl implements CompilationService {
     public Compilation getCompilationById(Long compilationId) {
 
         return compilationRepository.findById(compilationId)
-                .orElseThrow(() -> new CompilationNotFoundException("compilation is not exist"));
+                .orElseThrow(() -> new CompilationNotFoundException("компиляция не существует"));
     }
 
     @Override
     public Compilation updateCompilation(Compilation compilation) {
 
         if (!existCompilationById(compilation.getId())) {
-            log.error("CompilationService.getCompilationById: compilation with id={} not found", compilation.getId());
-            throw new CompilationNotFoundException("compilation not found");
+            log.error("CompilationService.getCompilationById: компиляция с id={} не найдено", compilation.getId());
+            throw new CompilationNotFoundException("компиляция не найдена");
         }
 
         return compilationRepository.save(compilation);

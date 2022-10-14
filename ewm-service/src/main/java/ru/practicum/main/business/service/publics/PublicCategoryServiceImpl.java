@@ -22,7 +22,7 @@ public class PublicCategoryServiceImpl implements PublicCategoryService {
 
     @Override
     public List<CategoryDto> getAllCategoriesByPages(Integer from, Integer size) {
-        log.info("PublicCategoryService.getAllCategoriesByPages: send request to categoryService");
+        log.info("PublicCategoryService.getAllCategoriesByPages: отправить запрос в categoryService");
 
         return categoryService.getCategoriesByPages(from, size)
                 .stream()

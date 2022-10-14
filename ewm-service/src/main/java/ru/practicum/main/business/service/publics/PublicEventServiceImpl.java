@@ -54,8 +54,8 @@ public class PublicEventServiceImpl implements PublicEventService {
         Event event = eventService.getEventById(eventId);
 
         if (!(event.getState() == EventState.PUBLISHED)) {
-            log.error("PublicApiService.getEventById: event with id={} not published", eventId);
-            throw new EventNotFoundException("event not published");
+            log.error("PublicApiService.getEventById: событие с id={} не опубликовано", eventId);
+            throw new EventNotFoundException("событие не опубликовано");
         }
 
         EventToGetDto eventToGetDto = setterParamsToEventService

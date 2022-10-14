@@ -20,7 +20,7 @@ public class AdminCompilationController {
     @PostMapping
     CompilationDto addCompilation(@RequestBody @Valid CompilationToCreateDto compilationToCreateDto) {
 
-        log.info("(Admin)CompilationController.addNewCompilation: получен запрос на добавление новой компиляции");
+        log.info("(Admin)CompilationController.addCompilation: получен запрос на добавление новой компиляции");
 
         return adminCompilationService.addCompilationByAdmin(compilationToCreateDto);
 
