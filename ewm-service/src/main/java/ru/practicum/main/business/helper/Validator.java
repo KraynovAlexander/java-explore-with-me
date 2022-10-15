@@ -16,7 +16,7 @@ import ru.practicum.main.users.service.UserService;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Slf4j
-public class Checker {
+public class Validator {
 
     private final UserService userService;
 
@@ -24,31 +24,31 @@ public class Checker {
 
     private final RequestService requestService;
 
-    public void userExistChecker(Long userId) {
+    public void userExistValidator(Long userId) {
         if (!userService.existById(userId)) {
-            log.error("Checker: пользователь с id={} не существует", userId);
-            throw new UserException("пользователь теперь найден");
+            log.error("Validator: пользователь с id={} не существует", userId);
+            throw new UserException("пользователь не найден");
         }
     }
 
-    public void eventExistChecker(Long eventID) {
+    public void eventExistValidator(Long eventID) {
         if (!eventService.existById(eventID)) {
-            log.error("Checker: пользователь с id={} не существует", eventID);
-            throw new EventNotFoundException("пользователь теперь найден");
+            log.error("Validator: пользователь с id={} не существует", eventID);
+            throw new EventNotFoundException("событие не найдено");
         }
     }
 
-    public void ownerEventChecker(Long userId, Long initiatorId) {
+    public void ownerEventValidator(Long userId, Long initiatorId) {
         if (!initiatorId.equals(userId)) {
-            log.error("Checker: Нет права доступа");
+            log.error("Validator: Нет права доступа");
             throw new NoAccessRightException("текущий пользователь не является владельцем события");
         }
     }
 
-    public void requestChecker(Long requestId) {
+    public void requestValidator(Long requestId) {
         if (!requestService.existById(requestId)) {
-            log.error("Checker: запрос с id={} не существует", requestId);
-            throw new RequestNotFoundException("не существует запрос не найден");
+            log.error("Validator: запрос с id={} не существует", requestId);
+            throw new RequestNotFoundException("запрос не найден");
         }
     }
 

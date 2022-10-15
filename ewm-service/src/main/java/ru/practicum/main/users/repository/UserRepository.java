@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Page<User> getUsersByIdIn(List<Long> ids, Pageable pageable);
 
-    @Query("select u.name from User u where u.id = ?1")
+    @Query("SELECT u.name FROM User u WHERE u.id = ?1")
     Optional<String> findUserNameById(Long userId);
 
 }

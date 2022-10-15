@@ -19,7 +19,7 @@ public class Event {
     @Column(name = "initiator_id")
     private Long initiator;
 
-    @Column(name = "annotation", length = 700, nullable = false)
+    @Column(name = "annotation", length = 500, nullable = false)
     private String annotation;
 
     @Column(name = "category_id")
@@ -28,7 +28,7 @@ public class Event {
     @Column(name = "confirmed_requests")
     private Long confirmedRequests = 0L;
 
-    @Column(name = "description", length = 1000, nullable = false)
+    @Column(name = "description", length = 2000, nullable = false)
     private String description;
 
     @Column(name = "created_on")
@@ -52,7 +52,7 @@ public class Event {
     @Column(name = "request_moderation")
     private boolean requestModeration;
 
-    @Column(name = "title", length = 100, nullable = false)
+    @Column(name = "title", length = 200, nullable = false)
     private String title;
 
     @Enumerated(EnumType.STRING)
