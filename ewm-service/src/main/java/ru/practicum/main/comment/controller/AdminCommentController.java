@@ -19,8 +19,9 @@ public class AdminCommentController {
     private final AdminCommentService adminCommentService;
 
     @GetMapping
-    public List<CommentToGetDto> getCommentsToModerateByPages(@PositiveOrZero @RequestParam Integer from,
-                                                              @Positive @RequestParam Integer size) {
+    public List<CommentToGetDto> getCommentsToModerateByPages(
+            @PositiveOrZero @RequestParam (name = "from", defaultValue = "0") Integer from,
+            @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
 
         log.info("AdminCommentController.getCommentToModerateByPages: получен запрос на получение " +
                 "комментарии для модерации");

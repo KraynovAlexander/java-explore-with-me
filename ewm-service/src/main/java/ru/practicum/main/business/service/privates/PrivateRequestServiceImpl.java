@@ -3,7 +3,7 @@ package ru.practicum.main.business.service.privates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.main.business.helper.Checker;
+import ru.practicum.main.business.helper.Validator;
 import ru.practicum.main.events.exceptions.NoAccessRightException;
 import ru.practicum.main.events.exceptions.WrongEventStateException;
 import ru.practicum.main.events.model.Event;
@@ -31,18 +31,18 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
 
     private final RequestService requestService;
 
-    private final Checker checker;
+    private final Validator validator;
 
 
     @Override
     public List<Request> getRequestsByEventIdByOwner(Long userId, Long eventId) {
 
-        checker.userExistChecker(userId);
-        checker.eventExistChecker(eventId);
+        validator.userExistValidator(userId);
+        validator.eventExistValidator(eventId);
 
         Event event = eventService.getEventById(eventId);
 
-        checker.ownerEventChecker(userId, event.getInitiator());
+        validator.ownerEventValidator(userId, event.getInitiator());
 
         return requestService.getRequestsByEventId(eventId);
     }
@@ -50,14 +50,14 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     @Override
     public Request confirmRequestByEventIdByOwner(Long userId, Long eventId, Long reqId) {
 
-        checker.userExistChecker(userId);
-        checker.eventExistChecker(eventId);
+        validator.userExistValidator(userId);
+        validator.eventExistValidator(eventId);
 
         Event event = eventService.getEventById(eventId);
 
-        checker.ownerEventChecker(userId, event.getInitiator());
+        validator.ownerEventValidator(userId, event.getInitiator());
 
-        checker.requestChecker(reqId);
+        validator.requestValidator(reqId);
 
         Request request = requestService.getRequestById(reqId);
 
@@ -93,14 +93,14 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     @Override
     public Request rejectRequestByEventIdByOwner(Long userId, Long eventId, Long reqId) {
 
-        checker.userExistChecker(userId);
-        checker.eventExistChecker(eventId);
+        validator.userExistValidator(userId);
+        validator.eventExistValidator(eventId);
 
         Event event = eventService.getEventById(eventId);
 
-        checker.ownerEventChecker(userId, event.getInitiator());
+        validator.ownerEventValidator(userId, event.getInitiator());
 
-        checker.requestChecker(reqId);
+        validator.requestValidator(reqId);
 
         Request request = requestService.getRequestById(reqId);
 
@@ -118,7 +118,7 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     @Override
     public List<Request> getRequestsByUserId(Long userId) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         return requestService.getRequestsByUserId(userId);
     }
@@ -126,8 +126,8 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     @Override
     public Request addRequestToEventByUser(Long userId, Long eventId) {
 
-        checker.userExistChecker(userId);
-        checker.eventExistChecker(eventId);
+        validator.userExistValidator(userId);
+        validator.eventExistValidator(eventId);
 
         Optional<Request> checkingRequest = requestService.getRequestByUserIdAndEventId(userId, eventId);
 
@@ -175,8 +175,8 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     @Override
     public Request cancelRequestByRequestOwner(Long userId, Long requestId) {
 
-        checker.userExistChecker(userId);
-        checker.requestChecker(requestId);
+        validator.userExistValidator(userId);
+        validator.requestValidator(requestId);
 
         Request request = requestService.getRequestById(requestId);
 

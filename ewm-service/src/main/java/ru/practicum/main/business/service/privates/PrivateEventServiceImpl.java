@@ -3,8 +3,8 @@ package ru.practicum.main.business.service.privates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.main.business.helper.Checker;
 import ru.practicum.main.business.helper.SetterParamsToEventService;
+import ru.practicum.main.business.helper.Validator;
 import ru.practicum.main.events.dto.EventToCreateDto;
 import ru.practicum.main.events.dto.EventToGetDto;
 import ru.practicum.main.events.dto.EventToUpdateByAdminDto;
@@ -29,12 +29,12 @@ public class PrivateEventServiceImpl implements PrivateEventService {
 
     private final SetterParamsToEventService setterParamsToEventService;
 
-    private final Checker checker;
+    private final Validator validator;
 
     @Override
     public List<EventToGetDto> getEventsByUser(Long userId, Integer from, Integer size) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         return eventService.getEventsByUserId(userId, from, size).stream()
                 .map(EventMapper::toGetDto)
@@ -45,9 +45,9 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     @Override
     public EventToGetDto updateEventByUser(Long userId, EventToUpdateByAdminDto eventToUpdateByAdminDto) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
-        checker.eventExistChecker(eventToUpdateByAdminDto.getEventId());
+        validator.eventExistValidator(eventToUpdateByAdminDto.getEventId());
 
         Event event = eventService.getEventById(eventToUpdateByAdminDto.getEventId());
 
@@ -84,7 +84,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
             throw new WrongEventDateException("неправильная дата события");
         }
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         Event event = EventMapper.toEventFromEventToCreateDto(eventToCreateDto);
 
@@ -99,13 +99,13 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     @Override
     public EventToGetDto getEventByIdByOwner(Long userId, Long eventId) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
-        checker.eventExistChecker(eventId);
+        validator.eventExistValidator(eventId);
 
         Event event = eventService.getEventById(eventId);
 
-        checker.ownerEventChecker(userId, event.getInitiator());
+        validator.ownerEventValidator(userId, event.getInitiator());
 
         return setterParamsToEventService.setCategoryNameAndInitiatorName(EventMapper.toGetDto(event));
     }
@@ -113,13 +113,13 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     @Override
     public EventToGetDto cancelEventByOwner(Long userId, Long eventId) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
-        checker.eventExistChecker(eventId);
+        validator.eventExistValidator(eventId);
 
         Event event = eventService.getEventById(eventId);
 
-        checker.ownerEventChecker(userId, event.getInitiator());
+        validator.ownerEventValidator(userId, event.getInitiator());
 
         if (event.getState() != EventState.PENDING) {
             log.error("PrivateApiService.cancelEventByOwner: состояние события должно быть ожидающим отмены, ваше состояние={}",

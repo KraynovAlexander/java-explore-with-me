@@ -42,7 +42,8 @@ public class AdminCommentServiceImpl implements AdminCommentService {
         Comment comment = commentService.getCommentById(commentId);
 
         if (comment.getCommentState() != CommentState.PENDING) {
-            log.error("AdminCommentService.publicCommentByAdmin: состояние комментария должно находиться в ОЖИДАНИИ, а нет {}",
+            log.error("AdminCommentService.publicCommentByAdmin: состояние комментария должно находиться в ОЖИДАНИИ, " +
+                            "а нет {}",
                     comment.getCommentState());
             throw new CommentStateException("неправильное состояние комментария");
         }

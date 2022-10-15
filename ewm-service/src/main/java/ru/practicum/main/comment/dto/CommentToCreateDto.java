@@ -15,7 +15,9 @@ public class CommentToCreateDto {
     private Long id;
 
     @NotBlank
+    @Length(min = 50)
     @Length(max = 800)
+
     private String text;
 
     @NotNull

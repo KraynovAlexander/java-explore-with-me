@@ -3,9 +3,9 @@ package ru.practicum.main.business.service.privates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.main.business.helper.Checker;
 import ru.practicum.main.business.helper.DateTimeStringConverter;
 import ru.practicum.main.business.helper.SetterParamsToCommentService;
+import ru.practicum.main.business.helper.Validator;
 import ru.practicum.main.comment.dto.CommentToCreateDto;
 import ru.practicum.main.comment.dto.CommentToGetDto;
 import ru.practicum.main.comment.mapper.CommentMapper;
@@ -27,14 +27,14 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
 
     private final SetterParamsToCommentService setterParamsToCommentService;
 
-    private final Checker checker;
+    private final Validator validator;
 
     @Override
     public CommentToGetDto addNewComment(Long userId, CommentToCreateDto commentToCreateDto) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
-        checker.eventExistChecker(commentToCreateDto.getEventId());
+        validator.eventExistValidator(commentToCreateDto.getEventId());
 
         if (commentService.findCommentByOwnerIdAndEventId(userId, commentToCreateDto.getEventId()).isPresent()) {
             log.error("PrivateCommentService.addNewComment: пользователь с id={} уже добавили комментарий к событию " +
@@ -54,7 +54,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     @Override
     public CommentToGetDto updateComment(Long userId, Long commentId, String text) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         Comment comment = commentService.getCommentById(commentId);
 
@@ -71,7 +71,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     @Override
     public CommentToGetDto getCommentById(Long userId, Long commentId) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         return setterParamsToCommentService
                 .setOwnerAndEventToComment(CommentMapper.toGetDto(commentService.getCommentById(commentId)));
@@ -81,7 +81,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     public List<CommentToGetDto> getCommentsByUserId(Long userId, String startTime, String endTime,
                                                      Integer from, Integer size) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         LocalDateTime start = DateTimeStringConverter.fromFormattedString(startTime);
         LocalDateTime end = DateTimeStringConverter.fromFormattedString(endTime);
@@ -96,8 +96,8 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     @Override
     public List<CommentToGetDto> getCommentsByEventId(Long userId, Long eventId, Integer from, Integer size) {
 
-        checker.userExistChecker(userId);
-        checker.eventExistChecker(eventId);
+        validator.userExistValidator(userId);
+        validator.eventExistValidator(eventId);
 
         return commentService.getCommentsByEventId(eventId, from, size)
                 .stream()
@@ -110,7 +110,7 @@ public class PrivateCommentServiceImpl implements PrivateCommentService {
     @Override
     public void deleteCommentByIdByOwner(Long userId, Long commentId) {
 
-        checker.userExistChecker(userId);
+        validator.userExistValidator(userId);
 
         commentService.deleteCommentById(commentId);
 

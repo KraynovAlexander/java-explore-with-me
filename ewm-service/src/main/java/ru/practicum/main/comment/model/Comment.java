@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "comments", schema = "public")
+@Table(name = "comments", schema = "public",uniqueConstraints = {@UniqueConstraint(columnNames = {"text", "ownerId"})})
 public class Comment {
 
     @Id
