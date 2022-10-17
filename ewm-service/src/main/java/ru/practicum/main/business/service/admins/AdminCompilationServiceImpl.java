@@ -44,7 +44,7 @@ public class AdminCompilationServiceImpl implements AdminCompilationService {
 
         for (Long eventId : eventsId) {
             if (!eventService.existById(eventId)) {
-                log.error("AdminService.addNewCompilationByAdmin: событие с id={} не существует", eventId);
+                log.error("AdminService.addCompilationByAdmin: событие с id={} не существует", eventId);
                 throw new EventNotFoundException("событие не найдено");
             }
         }

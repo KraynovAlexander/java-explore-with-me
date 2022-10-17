@@ -12,11 +12,11 @@ public class UserDto {
     private Long id;
 
     @Email
-    @Length(max = 60)
+    @Length(max = 50)
     private String email;
 
     @NotBlank
-    @Length(max = 60)
+    @Length(max = 50)
     private String name;
 
 }

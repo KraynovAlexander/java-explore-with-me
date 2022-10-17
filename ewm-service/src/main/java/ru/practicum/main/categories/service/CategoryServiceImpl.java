@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         if (category.getEvents().size() > 0) {
             log.error("CategoryService.deleteCategoryById: вы не можете удалить категорию, потому что она все еще используется");
-            throw new CategoryStillUseException();
+            throw new CategoryStillUseException("категория используется");
         }
 
         log.info("CategoryService.deleteCategoryById: отправьте запрос в базу данных на удаление категории с id={}", categoryId);

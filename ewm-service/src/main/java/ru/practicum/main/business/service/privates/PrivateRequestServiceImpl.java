@@ -152,7 +152,7 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
 
         if (event.getConfirmedRequests().equals(event.getParticipantLimit()) && event.getParticipantLimit() != 0) {
             log.error("PrivateApiService.addRequestToEventByUser: участники мероприятия полны");
-            throw new ParticipantsException();
+            throw new ParticipantsException("запрос на ваше мероприятие");
         }
 
         Request request = new Request();
