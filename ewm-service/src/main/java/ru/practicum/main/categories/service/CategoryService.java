@@ -3,7 +3,7 @@ package ru.practicum.main.categories.service;
 import ru.practicum.main.categories.dto.CategoryDto;
 import ru.practicum.main.categories.model.Category;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
     CategoryDto addCategory(CategoryDto categoryDto);
@@ -14,9 +14,9 @@ public interface CategoryService {
 
     boolean existById(Long categoryId);
 
-    String getCategoryNameById(Long categoryId);
+    Category getCategoryNameById(Long categoryId);
 
     Category getCategoryById(Long categoryId);
 
-    List<Category> getCategoriesByPages(Integer from, Integer size);
+    Optional<Category> getCategoriesByPages(Integer from, Integer size);
 }

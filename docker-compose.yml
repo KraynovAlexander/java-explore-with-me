@@ -8,9 +8,11 @@ services:
     depends_on:
       - stats-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/emw-stat
-      - POSTGRES_USER=emwuser
-      - POSTGRES_PASSWORD=emwuser
+      - DB_NAME=statistics
+        - POSTGRES_USER=emwuser
+        - POSTGRES_PASSWORD=emwuser
+        - DB_HOST=db_stats
+        - DB_PORT=5432
 
   stats-db:
     image: postgres:14-alpine

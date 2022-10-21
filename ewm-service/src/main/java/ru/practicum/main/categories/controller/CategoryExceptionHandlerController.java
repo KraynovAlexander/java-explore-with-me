@@ -11,8 +11,7 @@ import ru.practicum.main.business.helper.Error;
 public class CategoryExceptionHandlerController {
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public Error dataIntegrityViolationExceptionHandler(final DataIntegrityViolationException e) {
+       public Error dataIntegrityViolationExceptionHandler(final DataIntegrityViolationException e) {
 
         return new Error(e.getMessage());
 

@@ -84,7 +84,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
             throw new WrongEventDateException("неправильная дата события");
         }
 
-        validator.userExistValidator(userId);
+
 
         Event event = EventMapper.toEventFromEventToCreateDto(eventToCreateDto);
 

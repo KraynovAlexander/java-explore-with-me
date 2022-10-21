@@ -26,28 +26,24 @@ public class Validator {
 
     public void userExistValidator(Long userId) {
         if (!userService.existById(userId)) {
-            log.error("Validator: пользователь с id={} не существует", userId);
             throw new UserException("пользователь не найден");
         }
     }
 
     public void eventExistValidator(Long eventID) {
         if (!eventService.existById(eventID)) {
-            log.error("Validator: пользователь с id={} не существует", eventID);
             throw new EventNotFoundException("не существует запрос не найден");
         }
     }
 
     public void ownerEventValidator(Long userId, Long initiatorId) {
         if (!initiatorId.equals(userId)) {
-            log.error("Validator: Нет права доступа");
             throw new NoAccessRightException("текущий пользователь не является владельцем события");
         }
     }
 
     public void requestValidator(Long requestId) {
         if (!requestService.existById(requestId)) {
-            log.error("Validator: запрос с id={} не существует", requestId);
             throw new RequestNotFoundException("не существует запрос не найден");
         }
     }

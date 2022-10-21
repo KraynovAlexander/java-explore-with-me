@@ -24,7 +24,7 @@ public class AdminCategoryController {
         return adminCategoryService.addCategory(categoryDto);
     }
 
-    @PatchMapping
+    @PutMapping
     public CategoryDto updateCategory(@RequestBody @Validated(Update.class) CategoryDto categoryDto) {
         log.info("(Admin)CategoryController.updateCategory: получен запрос на обновление категории с id={}", categoryDto.getId());
         return adminCategoryService.updateCategory(categoryDto);

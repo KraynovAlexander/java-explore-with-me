@@ -13,7 +13,7 @@ import ru.practicum.main.categories.mapper.CategoryMapper;
 import ru.practicum.main.categories.model.Category;
 import ru.practicum.main.categories.repository.CategoryRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -72,9 +72,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public String getCategoryNameById(Long categoryId) {
+    public Category getCategoryNameById(Long categoryId) {
 
-        return categoryRepository.getCategoryNameById(categoryId)
+        return categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException("категория не существует"));
 
     }
@@ -89,10 +89,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategoriesByPages(Integer from, Integer size) {
+    public Optional<Category> getCategoriesByPages(Integer from, Integer size) {
 
         Pageable pageable = PageRequest.of(from / size, size, Sort.by("id").ascending());
 
-        return categoryRepository.getCategoriesBy(pageable).getContent();
+        return categoryRepository.findById(from.longValue());
     }
 }
