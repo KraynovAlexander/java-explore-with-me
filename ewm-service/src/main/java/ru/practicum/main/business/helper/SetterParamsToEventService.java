@@ -35,7 +35,7 @@ public class SetterParamsToEventService {
 
     public EventToGetDto setCategoryNameAndInitiatorName(EventToGetDto eventToGetDto) {
 
-        eventToGetDto.getCategory().setName(categoryService.getCategoryNameById(eventToGetDto.getCategory().getId()));
+        eventToGetDto.getCategory().setName(categoryService.getCategoryNameById(eventToGetDto.getId()));
         eventToGetDto.getInitiator().setName(userService.getUserNameById(eventToGetDto.getInitiator().getId()));
         eventToGetDto.setViews(getViewsFromStatServiceToEventsDto(eventToGetDto.getId()));
 

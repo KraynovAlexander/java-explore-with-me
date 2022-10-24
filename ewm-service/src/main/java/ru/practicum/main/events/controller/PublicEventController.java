@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/events")
 @Validated
-public class PublicEventController {
+public class  PublicEventController {
 
     private final PublicEventService publicEventService;
 

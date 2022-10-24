@@ -21,9 +21,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
                                                                                  LocalDateTime end,
                                                                                  Pageable pageable);
 
-    @Query("select e from Event e " +
-            "where (e.annotation like concat('%', ?1, '%') or e.description like concat('%', ?1, '%')) " +
-            "and e.category in ?2 and e.paid = ?3 and e.eventDate between ?4 and ?5")
+    @Query("SELECT e FROM Event e " +
+            "WHERE (e.annotation LIKE CONCAT('%', ?1, '%') OR e.description LIKE CONCAT('%', ?1, '%')) " +
+            "AND e.category IN ?2 AND e.paid = ?3 AND e.eventDate BETWEEN ?4 AND ?5")
     Page<Event> searchEventsByTextAndParams(
             String text, List<Long> categoriesId, boolean paid,
             LocalDateTime start, LocalDateTime end, Pageable pageable);
@@ -32,7 +32,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     Optional<Event> getFirstByCategory(Long categoryId);
 
-    @Query("select e.title from Event e where e.id = ?1")
+    @Query("SELECT e.title FROM Event e WHERE e.id = ?1")
     String getEventTitleById(Long eventId);
 
 }
